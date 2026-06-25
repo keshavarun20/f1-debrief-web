@@ -8,6 +8,7 @@ export interface Stint {
   compound: 'SOFT' | 'MEDIUM' | 'HARD' | 'INTERMEDIATE' | 'WET'
   deg_rate_per_lap: number
   base_pace_seconds: number
+  r_squared?: number
   predictions: TyrePrediction[]
 }
 
@@ -21,4 +22,19 @@ export interface SessionParams {
   grand_prix: string
   session_type: string
   driver: string
+}
+
+export interface Lap {
+  LapNumber: number
+  LapTime: number
+  Sector1Time: number | null
+  Sector2Time: number | null
+  Sector3Time: number | null
+  Compound: string
+  TyreLife: number
+}
+
+export interface LapsResponse {
+  driver: string
+  laps: Lap[]
 }

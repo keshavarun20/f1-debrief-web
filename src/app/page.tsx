@@ -1,65 +1,143 @@
-import Image from "next/image";
+import Link from 'next/link'
+
+const FEATURES = [
+  {
+    label: 'Tyre Degradation',
+    description: 'Actual vs predicted lap times per stint. Linear regression model per compound.',
+  },
+  {
+    label: 'Pace Delta',
+    description: 'Driver vs driver gap over a stint window. See where time is won and lost.',
+  },
+  {
+    label: 'Sector Analysis',
+    description: 'Sector by sector breakdown. Identify where a driver is fast or losing time.',
+  },
+  {
+    label: 'Race Story',
+    description: 'Automated key moment detection — undercuts, safety cars, fastest laps.',
+  },
+]
+
+const SEASONS = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="min-h-screen">
+
+      {/* Hero */}
+      <section className="max-w-5xl mx-auto px-4 pt-24 pb-20">
+        <p className="text-xs uppercase tracking-widest mb-4" style={{
+          color: '#E8380D',
+          fontFamily: 'var(--font-geist-mono)',
+        }}>
+          Post-session analysis
+        </p>
+        <h1 className="text-5xl font-semibold tracking-tight leading-tight mb-6" style={{ color: '#F2EFE8' }}>
+          Understand every race.<br />
+          <span style={{ color: '#6B6B6B' }}>Not just watch it.</span>
+        </h1>
+        <p className="text-base mb-10 max-w-xl" style={{
+          color: '#6B6B6B',
+          fontFamily: 'var(--font-geist-mono)',
+          lineHeight: 1.8,
+        }}>
+          F1 Debrief is a post-session analyst tool. Pick any race from 2018–2025,
+          select a driver, and get tyre degradation models, sector breakdowns,
+          and pace comparisons — the kind of data a race engineer sees.
+        </p>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/analyse"
+            className="px-6 py-3 rounded-lg text-sm font-medium transition-all active:scale-[0.98]"
+            style={{
+              background: '#E8380D',
+              color: '#F2EFE8',
+              fontFamily: 'var(--font-geist-mono)',
+            }}
+          >
+            Start analysing →
+          </Link>
+          <span className="text-xs" style={{ color: '#6B6B6B', fontFamily: 'var(--font-geist-mono)' }}>
+            No account needed
+          </span>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="max-w-5xl mx-auto px-4">
+        <div style={{ borderTop: '1px solid #2A2A2A' }} />
+      </div>
+
+      {/* Features */}
+      <section className="max-w-5xl mx-auto px-4 py-20">
+        <p className="text-xs uppercase tracking-widest mb-10" style={{
+          color: '#6B6B6B',
+          fontFamily: 'var(--font-geist-mono)',
+        }}>
+          What's inside
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ background: '#2A2A2A' }}>
+          {FEATURES.map((f) => (
+            <div key={f.label} className="p-6" style={{ background: '#0D0D0D' }}>
+              <p className="text-sm font-semibold mb-2" style={{
+                color: '#F2EFE8',
+                fontFamily: 'var(--font-geist-mono)',
+              }}>
+                {f.label}
+              </p>
+              <p className="text-xs leading-relaxed" style={{
+                color: '#6B6B6B',
+                fontFamily: 'var(--font-geist-mono)',
+              }}>
+                {f.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="max-w-5xl mx-auto px-4">
+        <div style={{ borderTop: '1px solid #2A2A2A' }} />
+      </div>
+
+      {/* Seasons */}
+      <section className="max-w-5xl mx-auto px-4 py-20">
+        <p className="text-xs uppercase tracking-widest mb-8" style={{
+          color: '#6B6B6B',
+          fontFamily: 'var(--font-geist-mono)',
+        }}>
+          Available seasons
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {SEASONS.map((s) => (
+            <Link
+              key={s}
+              href={`/analyse?year=${s}`}
+              className="px-4 py-2 rounded-lg text-xs transition-all hover:border-white/20"
+              style={{
+                border: '1px solid #2A2A2A',
+                color: '#6B6B6B',
+                fontFamily: 'var(--font-geist-mono)',
+                background: '#161616',
+              }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              {s} season
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <div className="max-w-5xl mx-auto px-4 pb-12">
+        <div className="pt-8" style={{ borderTop: '1px solid #2A2A2A' }}>
+          <p className="text-xs" style={{ color: '#6B6B6B', fontFamily: 'var(--font-geist-mono)' }}>
+            F1 Debrief · Data via FastF1 + OpenF1 · Not affiliated with Formula 1
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+      </div>
+
+    </main>
+  )
 }

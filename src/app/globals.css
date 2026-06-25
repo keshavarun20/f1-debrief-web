@@ -1,26 +1,30 @@
+@import 'flag-icons/css/flag-icons.min.css';
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-geist: 'Geist', sans-serif;
+  --font-geist-mono: 'Geist Mono', monospace;
+
+  --color-bg: #0D0D0D;
+  --color-surface: #161616;
+  --color-border: #2A2A2A;
+  --color-text: #F2EFE8;
+  --color-muted: #6B6B6B;
+  --color-accent: #E8380D;
+
+  --compound-soft: #E8380D;
+  --compound-medium: #F5C518;
+  --compound-hard: #D4D0C8;
+  --compound-inter: #4CAF50;
+  --compound-wet: #1E90FF;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-geist);
 }
